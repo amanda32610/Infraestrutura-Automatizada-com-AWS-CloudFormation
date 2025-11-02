@@ -1,0 +1,50 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Infraestrutura automatizada simples com AWS CloudFormation",
+  "Resources": {
+    "MyEC2Instance": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "InstanceType": "t2.micro",
+        "ImageId": "ami-0c02fb55956c7d316",
+        "SecurityGroups": [ { "Ref": "MySecurityGroup" } ],
+        "Tags": [
+          { "Key": "Name", "Value": "InfraEC2" }
+        ]
+      }
+    },
+    "MySecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Permite acesso SSH",
+        "SecurityGroupIngress": [
+          {
+            "IpProtocol": "tcp",
+            "FromPort": "22",
+            "ToPort": "22",
+            "CidrIp": "0.0.0.0/0"
+          }
+        ]
+      }
+    },
+    "MyS3Bucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "minha-infra-s3-bucket-67889",
+        "Tags": [
+          { "Key": "Name", "Value": "InfraS3Bucket" }
+        ]
+      }
+    }
+  },
+  "Outputs": {
+    "EC2InstanceId": {
+      "Description": "ID da instância EC2",
+      "Value": { "Ref": "MyEC2Instance" }
+    },
+    "S3BucketName": {
+      "Description": "Nome do bucket S3",
+      "Value": { "Ref": "MyS3Bucket" }
+    }
+  }
+}
