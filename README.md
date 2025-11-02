@@ -54,6 +54,7 @@ Inclui a criação de EC2, Security Group e S3, além de **Outputs** que retorna
 
 ## 📂 Estrutura do Repositório
 │── README.md
+
 └── infrastructure-stack.json
 
 
